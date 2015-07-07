@@ -461,7 +461,7 @@ packet_routed:
 	//	id= *(optptr + 3);
 //		printk(KERN_ALERT "id: %x\n", id);
 			
-		iph->tos = dscp[2];
+		iph->tos = dscp[8];
 			
 //		printk(KERN_ALERT "tos default: %x\n", iph->tos);
 	}
