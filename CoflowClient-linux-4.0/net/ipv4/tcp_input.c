@@ -3939,7 +3939,7 @@ static void tcp_fin(struct sock *sk)
 
 	/*haojin*/
 	//	printk(KERN_ALERT "TCP_FIN_WAIT2\n");
-		spin_lock(&coflow_lock);
+		spin_lock_irq(&coflow_lock);
 		inet = inet_sk(sk);
 		info = pureackinfo_header;
 		previous = pureackinfo_header;
@@ -3971,7 +3971,7 @@ static void tcp_fin(struct sock *sk)
 	//			printk(KERN_ALERT "Free pureackinfo:source port: %x dest port: %x\n", info->srcport, info->dstport);	
 			}
 		}
-		spin_unlock(&coflow_lock);
+		spin_unlock_irq(&coflow_lock);
 /*end*/		
 
 
@@ -5242,7 +5242,7 @@ void tcp_rcv_established(struct sock *sk, struct sk_buff *skb,
 //				printk(KERN_ALERT "ACK res1: %x\n", th->res1);
 //				printk(KERN_ALERT "source port: %x\n", th->source);
 //				printk(KERN_ALERT "dest port: %x\n", th->dest);
-				spin_lock(&coflow_lock);
+				spin_lock_irq(&coflow_lock);
 				if((th->res1 >= 1) && (th->res1 <=8))
 				{
 //					printk(KERN_ALERT "ACK res1: %x  source port: %x  dest port: %x\n", th->res1, th->source, th->dest);	
@@ -5292,7 +5292,7 @@ void tcp_rcv_established(struct sock *sk, struct sk_buff *skb,
 		
 
 				}
-				spin_unlock(&coflow_lock);
+				spin_unlock_irq(&coflow_lock);
 
 
 
@@ -5399,7 +5399,7 @@ step5:
 
 
 /*haojin*/
-	spin_lock(&coflow_lock);
+	spin_lock_irq(&coflow_lock);
 	if((th->res1 >= 1) && (th->res1 <=8))
 	{
 //			printk(KERN_ALERT "ACK res1: %x\n", th->res1);
@@ -5455,7 +5455,7 @@ step5:
 			
 			
 		}
-		spin_unlock(&coflow_lock);
+		spin_unlock_irq(&coflow_lock);
 			
 /*end*/
 
